@@ -14,9 +14,9 @@ double **alloc_matrix(void) /* Allocate the array */
     /* Check if allocation succeeded. (check for NULL pointer) */
     int i, j, k; 
     double **array;
-    array = malloc(XDIM*sizeof(double *));
+    array = malloc((long unsigned int)XDIM*(long unsigned int)sizeof(double *));
     for(i = 0 ; i < XDIM ; i++)
-        array[i] = malloc(YDIM*sizeof(double) );
+        array[i] = malloc((long unsigned int)YDIM*sizeof(double) );
   
     for(j=0; j<XDIM; j++)
         for(k=0; k<YDIM; k++)
@@ -40,12 +40,13 @@ void compute(double** arr, int kern[3][3]){
     int i, j, k, l;
     for(i = 0 ; i < XDIM ; i++)
         for(j = 0 ; j < YDIM ; j++){
-            printf("processing: %d - %d \n", i, j);
+            //printf("processing: %d - %d \n", i, j);
             if(i >= 1 && j >=1 && i < XDIM-1 && j <YDIM-1){
                 for(k = 0; k < 3; k++)
                     for(l = 0; l < 3; l++){
                         int x = i + (l-1);
                         int y = j + (k-1);
+                        y=y;
                         dato = arr[x][j];
                         tmp_sum[l*3+k] = 2*(2*kern[l][k]*dato)/1000 + 1;
                     }
@@ -73,8 +74,9 @@ void print(double** arr) {
 int main(void)
 {
     int i = 0;
+    i=i;
     double **arr;
-    int kern[3][3] = {0, -1, 0, -1, 5, -1, 0, -1, 0};
+    int kern[3][3] = {{0, -1, 0},{-1, 5, -1},{0, -1, 0}};
 
     arr = alloc_matrix();
     fill(arr);
