@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <unistd.h>
 #include <math.h>
 #include <time.h>
 
@@ -65,16 +66,15 @@ void compute(double** arr, int kern[3][3]){
 
 void print(double** arr) {
     int i, j;
+    arr=arr;
     for(i = 0 ; i < XDIM ; i++)
-        for(j = 0 ; j < YDIM ; j++)
-            printf("array[%d][%d] = %f\n", i, j, arr[i][j]);
+        for(j = 0 ; j < YDIM ; j++);
+        //printf("array[%d][%d] = %f\n", i, j, arr[i][j]);
 }
 
 
 int main(void)
 {
-    int i = 0;
-    i=i;
     double **arr;
     int kern[3][3] = {{0, -1, 0},{-1, 5, -1},{0, -1, 0}};
 
