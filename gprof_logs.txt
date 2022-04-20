@@ -19,3 +19,25 @@ Each sample counts as 0.01 seconds.
  20.65      7.94     1.75        1     1.75     1.75  print
   4.04      8.28     0.34        1     0.34     0.34  fill
   2.97      8.53     0.25        1     0.25     0.25  alloc_matrix
+
+3rd run [comment print on print]
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 91.79      6.13     6.13        1     6.13     6.13  compute
+  3.32      6.35     0.22        1     0.22     0.22  alloc_matrix
+  3.32      6.57     0.22        1     0.22     0.22  fill
+  1.96      6.71     0.13        1     0.13     0.13  print
+
+4 run [save output in a file] 
+Flat profile:
+
+Each sample counts as 0.01 seconds.
+  %   cumulative   self              self     total           
+ time   seconds   seconds    calls   s/call   s/call  name    
+ 86.89      6.10     6.10        1     6.10     6.10  compute
+  7.17      6.60     0.50        1     0.50     0.50  print
+  3.73      6.86     0.26        1     0.26     0.26  fill
+  2.87      7.07     0.20        1     0.20     0.20  alloc_matrix

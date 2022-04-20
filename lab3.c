@@ -47,8 +47,7 @@ void compute(double** arr, int kern[3][3]){
                     for(l = 0; l < 3; l++){
                         int x = i + (l-1);
                         int y = j + (k-1);
-                        y=y;
-                        dato = arr[x][j];
+                        dato = arr[x][y];
                         tmp_sum[l*3+k] = 2*(2*kern[l][k]*dato)/1000 + 1;
                     }
 
@@ -65,11 +64,11 @@ void compute(double** arr, int kern[3][3]){
 
 
 void print(double** arr) {
-    int i, j;
-    arr=arr;
-    for(i = 0 ; i < XDIM ; i++)
-        for(j = 0 ; j < YDIM ; j++);
-        //printf("array[%d][%d] = %f\n", i, j, arr[i][j]);
+    FILE *file = fopen("output","w");
+    for(int i = 0 ; i < XDIM ; i++)
+        for(int j = 0 ; j < YDIM ; j++)
+            fprintf(file,"array[%d][%d] = %f\n", i, j, arr[i][j]);
+    fclose(file);
 }
 
 
