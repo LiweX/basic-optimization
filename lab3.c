@@ -47,7 +47,6 @@ void compute(double** arr, int kern[3][3]){
     int i, j;
     for(i = 1 ; i < XDIM-1 ; i++)
         for(j = 1 ; j < YDIM-1 ; j++){
-            //printf("processing: %d - %d \n", i, j);
 
                         accum = 0;
                         dato = arr[i - 1][j - 1];
