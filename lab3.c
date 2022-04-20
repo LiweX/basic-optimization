@@ -33,41 +33,42 @@ void fill(double** arr) {
 void compute(double** arr, int kern[3][3]){
     double tmp_sum[9];
     double dato, accum;
+    double temp = 1/250;
     int i, j,x,y;
     for(i = 1 ; i < XDIM-1 ; i++)
         for(j = 1 ; j < YDIM-1 ; j++){
             //printf("processing: %d - %d \n", i, j);
             
                 
-                    
+                        
                         x = i - 1;
                         y = j - 1;
                         dato = arr[x][y];
-                        tmp_sum[0] = 2.0*(2.0*(double)kern[0][0]*dato)/1000.0 + 1.0;
+                        tmp_sum[0] = temp*(double)kern[0][0]*dato + 1.0;
                         y = j - 1;
                         dato = arr[i][y];
-                        tmp_sum[3] = 2.0*(2.0*(double)kern[1][0]*dato)/1000.0 + 1.0;
+                        tmp_sum[3] = temp*(double)kern[1][0]*dato + 1.0;
                         dato = arr[i + 1][j - 1];
-                        tmp_sum[6] = 2.0*(2.0*(double)kern[2][0]*dato)/1000.0 + 1.0;
+                        tmp_sum[6] = temp*(double)kern[2][0]*dato + 1.0;
                         x = i - 1;
                         dato = arr[x][j];
-                        tmp_sum[1] = 2.0*(2.0*(double)kern[0][1]*dato)/1000.0 + 1.0;
+                        tmp_sum[1] = temp*(double)kern[0][1]*dato + 1.0;
                         dato = arr[i][j];
-                        tmp_sum[4] = 2.0*(2.0*(double)kern[1][1]*dato)/1000.0 + 1.0;
+                        tmp_sum[4] = temp*(double)kern[1][1]*dato + 1.0;
                         x = i + 1;
                         dato = arr[x][j];
-                        tmp_sum[7] = 2.0*(2.0*(double)kern[2][1]*dato)/1000.0 + 1.0;
+                        tmp_sum[7] = temp*(double)kern[2][1]*dato + 1.0;
                         x = i - 1;
                         y = j + 1;
                         dato = arr[x][y];
-                        tmp_sum[2] = 2.0*(2.0*(double)kern[0][2]*dato)/1000.0 + 1.0;
+                        tmp_sum[2] = temp*(double)kern[0][2]*dato + 1.0;
                         y = j + 1;
                         dato = arr[i][y];
-                        tmp_sum[5] = 2.0*(2.0*(double)kern[1][2]*dato)/1000.0 + 1.0;
+                        tmp_sum[5] = temp*(double)kern[1][2]*dato + 1.0;
                         x = i + 1;
                         y = j + 1;
                         dato = arr[x][y];
-                        tmp_sum[8] = 2.0*(2.0*(double)kern[2][2]*dato)/1000.0 + 1.0;
+                        tmp_sum[8] = temp*(double)kern[2][2]*dato + 1.0;
 
                     
 
