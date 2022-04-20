@@ -10,34 +10,29 @@ int XDIM = 10000;
 int YDIM = 10000;
 
 // We return the pointer
-double **alloc_matrix(void) /* Allocate the array */
+float **alloc_matrix(void) /* Allocate the array */
 {
     /* Check if allocation succeeded. (check for NULL pointer) */
-    int i, j, k; 
-    double **array;
-    array = malloc((long unsigned int)XDIM*(long unsigned int)sizeof(double *));
-    for(i = 0 ; i < XDIM ; i++)
-        array[i] = malloc((long unsigned int)YDIM*sizeof(double) );
-  
-    for(j=0; j<XDIM; j++)
-        for(k=0; k<YDIM; k++)
-            memset(&array[k][j], j, sizeof(double));
+    float **array;
+    array = calloc((size_t)XDIM, sizeof(float *));
+    for(int i = 0 ; i < XDIM ; i++)
+        array[i] = calloc((size_t)YDIM, sizeof(float));
     return array;
 }
 
 
-void fill(double** arr) {
+void fill(float** arr) {
     int i, j;
     time_t t1; 
     srand ( (unsigned) time (&t1));
     for(i = 0 ; i < XDIM ; i++)
         for(j = 0 ; j < YDIM ; j++)
-            arr[i][j] = (double)(rand() % 100);
+            arr[i][j] = (float)(rand() % 100);
 }
 
-void compute(double** arr, int kern[3][3]){
-    double tmp_sum[9];
-    double dato, accum;
+void compute(float** arr, int kern[3][3]){
+    float tmp_sum[9];
+    float dato, accum;
     int i, j, k, l;
     for(i = 0 ; i < XDIM ; i++)
         for(j = 0 ; j < YDIM ; j++){
@@ -48,7 +43,7 @@ void compute(double** arr, int kern[3][3]){
                         int x = i + (l-1);
                         int y = j + (k-1);
                         dato = arr[x][y];
-                        tmp_sum[l*3+k] = 2*(2*kern[l][k]*dato)/1000 + 1;
+                        tmp_sum[l*3+k] = 2.0f*(2.0f*(float)kern[l][k]*dato)/1000.0f + 1.0f;
                     }
 
                 accum = 0;
@@ -63,7 +58,7 @@ void compute(double** arr, int kern[3][3]){
 
 
 
-void print(double** arr) {
+void print(float** arr) {
     FILE *file = fopen("output","w");
     for(int i = 0 ; i < XDIM ; i++)
         for(int j = 0 ; j < YDIM ; j++)
@@ -74,7 +69,7 @@ void print(double** arr) {
 
 int main(void)
 {
-    double **arr;
+    float **arr;
     int kern[3][3] = {{0, -1, 0},{-1, 5, -1},{0, -1, 0}};
 
     arr = alloc_matrix();
