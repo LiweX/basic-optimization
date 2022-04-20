@@ -26,49 +26,48 @@ void fill(double** arr) {
     time_t t1; 
     srand ( (unsigned) time (&t1));
     for(i = 0 ; i < XDIM ; i++)
-        for(j = 0 ; j < YDIM ; j++)
+        for(j = 0 ; j < YDIM ; j+=10){
             arr[i][j] = (double)(rand() % 100);
+            arr[i][j+1] = (double)(rand() % 100);
+            arr[i][j+2] = (double)(rand() % 100);
+            arr[i][j+3] = (double)(rand() % 100);
+            arr[i][j+4] = (double)(rand() % 100);
+            arr[i][j+5] = (double)(rand() % 100);
+            arr[i][j+6] = (double)(rand() % 100);
+            arr[i][j+7] = (double)(rand() % 100);
+            arr[i][j+8] = (double)(rand() % 100);
+            arr[i][j+9] = (double)(rand() % 100);
+            
+        }
+
 }
 
 void compute(double** arr, int kern[3][3]){
     double tmp_sum[9];
     double dato, accum;
-    double temp = 1/250;
-    int i, j,x,y;
+    int i, j;
     for(i = 1 ; i < XDIM-1 ; i++)
         for(j = 1 ; j < YDIM-1 ; j++){
             //printf("processing: %d - %d \n", i, j);
             
-                
-                        
-                        x = i - 1;
-                        y = j - 1;
-                        dato = arr[x][y];
-                        tmp_sum[0] = temp*(double)kern[0][0]*dato + 1.0;
-                        y = j - 1;
-                        dato = arr[i][y];
-                        tmp_sum[3] = temp*(double)kern[1][0]*dato + 1.0;
+                        dato = arr[i - 1][j - 1];
+                        tmp_sum[0] = (2.0*(double)kern[0][0]*dato)*0.002 + 1.0;
+                        dato = arr[i][j - 1];
+                        tmp_sum[3] = (2.0*(double)kern[1][0]*dato)*0.002 + 1.0;
                         dato = arr[i + 1][j - 1];
-                        tmp_sum[6] = temp*(double)kern[2][0]*dato + 1.0;
-                        x = i - 1;
-                        dato = arr[x][j];
-                        tmp_sum[1] = temp*(double)kern[0][1]*dato + 1.0;
+                        tmp_sum[6] = (2.0*(double)kern[2][0]*dato)*0.002 + 1.0;
+                        dato = arr[i - 1][j];
+                        tmp_sum[1] = (2.0*(double)kern[0][1]*dato)*0.002 + 1.0;
                         dato = arr[i][j];
-                        tmp_sum[4] = temp*(double)kern[1][1]*dato + 1.0;
-                        x = i + 1;
-                        dato = arr[x][j];
-                        tmp_sum[7] = temp*(double)kern[2][1]*dato + 1.0;
-                        x = i - 1;
-                        y = j + 1;
-                        dato = arr[x][y];
-                        tmp_sum[2] = temp*(double)kern[0][2]*dato + 1.0;
-                        y = j + 1;
-                        dato = arr[i][y];
-                        tmp_sum[5] = temp*(double)kern[1][2]*dato + 1.0;
-                        x = i + 1;
-                        y = j + 1;
-                        dato = arr[x][y];
-                        tmp_sum[8] = temp*(double)kern[2][2]*dato + 1.0;
+                        tmp_sum[4] = (2.0*(double)kern[1][1]*dato)*0.002 + 1.0;
+                        dato = arr[i + 1][j];
+                        tmp_sum[7] = (2.0*(double)kern[2][1]*dato)*0.002 + 1.0;
+                        dato = arr[i - 1][j + 1];
+                        tmp_sum[2] = (2.0*(double)kern[0][2]*dato)*0.002 + 1.0;
+                        dato = arr[i][j + 1];
+                        tmp_sum[5] = (2.0*(double)kern[1][2]*dato)*0.002 + 1.0;
+                        dato = arr[ i + 1][j + 1];
+                        tmp_sum[8] = (2.0*(double)kern[2][2]*dato)*0.002 + 1.0;
 
                     
 
@@ -94,8 +93,18 @@ void compute(double** arr, int kern[3][3]){
 void print(double** arr) {
     FILE *file = fopen("output.txt","w");
     for(int i = 0 ; i < XDIM ; i++)
-        for(int j = 0 ; j < YDIM ; j++)
+        for(int j = 0 ; j < YDIM ; j+=10){
             fprintf(file,"array[%d][%d] = %f\n", i, j, arr[i][j]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+1, arr[i][j+1]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+2, arr[i][j+2]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+3, arr[i][j+3]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+4, arr[i][j+4]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+5, arr[i][j+5]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+6, arr[i][j+6]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+7, arr[i][j+7]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+8, arr[i][j+8]);
+            fprintf(file,"array[%d][%d] = %f\n", i, j+9, arr[i][j+9]);
+        }
     fclose(file);
 }
 
