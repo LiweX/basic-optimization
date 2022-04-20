@@ -43,48 +43,32 @@ void fill(double** arr) {
 }
 
 void compute(double** arr, int kern[3][3]){
-    double tmp_sum[9];
     double dato, accum;
     int i, j;
     for(i = 1 ; i < XDIM-1 ; i++)
         for(j = 1 ; j < YDIM-1 ; j++){
             //printf("processing: %d - %d \n", i, j);
-            
+
+                        accum = 0;
                         dato = arr[i - 1][j - 1];
-                        tmp_sum[0] = (2.0*(double)kern[0][0]*dato)*0.002 + 1.0;
+                        accum+= (2.0*(double)kern[0][0]*dato)*0.002 + 1.0;
                         dato = arr[i][j - 1];
-                        tmp_sum[3] = (2.0*(double)kern[1][0]*dato)*0.002 + 1.0;
+                        accum+= (2.0*(double)kern[1][0]*dato)*0.002 + 1.0;
                         dato = arr[i + 1][j - 1];
-                        tmp_sum[6] = (2.0*(double)kern[2][0]*dato)*0.002 + 1.0;
+                        accum+= (2.0*(double)kern[2][0]*dato)*0.002 + 1.0;
                         dato = arr[i - 1][j];
-                        tmp_sum[1] = (2.0*(double)kern[0][1]*dato)*0.002 + 1.0;
+                        accum+= (2.0*(double)kern[0][1]*dato)*0.002 + 1.0;
                         dato = arr[i][j];
-                        tmp_sum[4] = (2.0*(double)kern[1][1]*dato)*0.002 + 1.0;
+                        accum+= (2.0*(double)kern[1][1]*dato)*0.002 + 1.0;
                         dato = arr[i + 1][j];
-                        tmp_sum[7] = (2.0*(double)kern[2][1]*dato)*0.002 + 1.0;
+                        accum+= (2.0*(double)kern[2][1]*dato)*0.002 + 1.0;
                         dato = arr[i - 1][j + 1];
-                        tmp_sum[2] = (2.0*(double)kern[0][2]*dato)*0.002 + 1.0;
+                        accum+= (2.0*(double)kern[0][2]*dato)*0.002 + 1.0;
                         dato = arr[i][j + 1];
-                        tmp_sum[5] = (2.0*(double)kern[1][2]*dato)*0.002 + 1.0;
+                        accum+= (2.0*(double)kern[1][2]*dato)*0.002 + 1.0;
                         dato = arr[ i + 1][j + 1];
-                        tmp_sum[8] = (2.0*(double)kern[2][2]*dato)*0.002 + 1.0;
-
-                    
-
-                accum = 0;
-                
-                   
-                        accum = accum + tmp_sum[0];
-                        accum = accum + tmp_sum[1];
-                        accum = accum + tmp_sum[2];
-                        accum = accum + tmp_sum[3];
-                        accum = accum + tmp_sum[4];
-                        accum = accum + tmp_sum[5];
-                        accum = accum + tmp_sum[6];
-                        accum = accum + tmp_sum[7];
-                        accum = accum + tmp_sum[8];
-                    
-            arr[i][j] = accum;
+                        accum+= (2.0*(double)kern[2][2]*dato)*0.002 + 1.0;  
+                        arr[i][j] = accum;
         }    
 }
 
