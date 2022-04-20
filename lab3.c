@@ -33,7 +33,7 @@ void fill(double** arr) {
 void compute(double** arr, int kern[3][3]){
     double tmp_sum[9];
     double dato, accum;
-    int i, j, k,x,y;
+    int i, j,x,y;
     for(i = 1 ; i < XDIM-1 ; i++)
         for(j = 1 ; j < YDIM-1 ; j++){
             //printf("processing: %d - %d \n", i, j);
@@ -48,9 +48,7 @@ void compute(double** arr, int kern[3][3]){
                         y = j - 1;
                         dato = arr[x][y];
                         tmp_sum[3] = 2.0*(2.0*(double)kern[1][0]*dato)/1000.0 + 1.0;
-                        x = i + 1;
-                        y = j - 1;
-                        dato = arr[x][y];
+                        dato = arr[i + 1][j - 1];
                         tmp_sum[6] = 2.0*(2.0*(double)kern[2][0]*dato)/1000.0 + 1.0;
                         x = i - 1;
                         y = j;
@@ -80,12 +78,18 @@ void compute(double** arr, int kern[3][3]){
                     
 
                 accum = 0;
-                for(k = 0; k < 3; k++)
-                    {
-                        accum = accum + tmp_sum[k*3+0];
-                        accum = accum + tmp_sum[k*3+1];
-                        accum = accum + tmp_sum[k*3+2];
-                    }
+                
+                   
+                        accum = accum + tmp_sum[0];
+                        accum = accum + tmp_sum[1];
+                        accum = accum + tmp_sum[2];
+                        accum = accum + tmp_sum[3];
+                        accum = accum + tmp_sum[4];
+                        accum = accum + tmp_sum[5];
+                        accum = accum + tmp_sum[6];
+                        accum = accum + tmp_sum[7];
+                        accum = accum + tmp_sum[8];
+                    
             arr[i][j] = accum;
         }    
 }
